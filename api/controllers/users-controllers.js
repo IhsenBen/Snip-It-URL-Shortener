@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 const geoip = require('geoip-country');
 const requestIp = require('request-ip');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const HttpError = require('../models/error');
 const User = require('../models/User');
 
@@ -58,14 +58,18 @@ const createUser = async (req, res, next) => {
       new HttpError('Something went wrong, could not create user', 500)
     );
   }
-  let token;
-  try{
-    token = jwt.sign(
-      { userId: newUser.id, username: newUser.username },
-      process.env.JWT_KEY,
-      { expiresIn: '1h' }
-    );
-  }
+  // let token;
+  // try{
+  //   token = jwt.sign(
+  //     { userId: newUser.id, username: newUser.username },
+  //     process.env.JWT_KEY,
+  //     { expiresIn: '1h' }
+  //   );
+  // }catch{
+  //   return next(
+  //     new HttpError('Something went wrong, could not create user', 500)
+  //   );
+  // }
 
 
   res.json({
@@ -99,13 +103,19 @@ const loginUser = async (req, res, next) => {
   if (!isEqual) {
     return next(new HttpError('Password is incorrect', 401));
   }
-  let token;
-  try{
-    token = jwt.sign(
-      { userId: user.id,  user: user.username },
-      process.env.JWT_KEY,
-      { expiresIn: '1h' }
-    );
+
+  // let token;
+  // try{
+  //   token = jwt.sign(
+  //     { userId: user.id,  user: user.username },
+  //     process.env.JWT_KEY,
+  //     { expiresIn: '1h' }
+  //   );
+  // }catch{
+  //   return next(
+  //     new HttpError('Something went wrong, could not create user', 500)
+  //   );
+  // }
     
   res.json({
     user,
