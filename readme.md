@@ -27,7 +27,7 @@ MongoDB seemed also a suitable choice given the mobility provided by the Documen
  - Formik
  - Yup
  
- #🔌 Live Preview 🔌
+ ##🔌 Live Preview 🔌
    ## 🌍 WebSite 🌍 = https://url-snip-it.netlify.app/
    ## 💾 API 💾 = https://url-snip-api2.herokuapp.com/
  
