@@ -12,20 +12,24 @@ MongoDB seemed also a suitable choice given the mobility provided by the Documen
  
 ## Back-End
 
- -Node Js
- -Express
- -MongoDB
- -Mongoose Js
- -Express-validator
- -JWT
- -Bcrypt
+ - Node Js
+ - Express
+ - MongoDB
+ - Mongoose Js
+ - Express-validator
+ - JWT
+ - Bcrypt
 
 ## Front-End
 
- -React JS
- -Material UI
- -Formik
- -Yup
+ - React JS
+ - Material UI
+ - Formik
+ - Yup
+ 
+ #🔌 Live Preview 🔌
+   ## 🌍 WebSite 🌍 = https://url-snip-it.netlify.app/
+   ## 💾 API 💾 = https://url-snip-api2.herokuapp.com/
  
 
 
