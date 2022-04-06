@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import Errors from './Errors';
 
-export default function UrlsTable() {
+export default function UrlsTable(props) {
   const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -37,7 +37,7 @@ export default function UrlsTable() {
       setLoading(false);
     };
     sendRequest();
-  }, []);
+  }, [props.loadTable]);
 
   return (
     <Container maxWidth="xl">
@@ -64,7 +64,7 @@ export default function UrlsTable() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.longUrl}
+                {row.longUrl.slice(0, 30) }...
                 </TableCell>
                 <TableCell align="right">
                   <a

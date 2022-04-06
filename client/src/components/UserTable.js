@@ -14,13 +14,15 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/auth-context';
 import Errors from './Errors';
 
-export default function UrlsTable() {
+export default function UrlsTable(props) {
   const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const auth = useContext(AuthContext);
   const userId = auth.userId;
   const username = auth.username;
+
+  
 
   useEffect(() => {
     const sendRequest = async () => {
@@ -43,7 +45,7 @@ export default function UrlsTable() {
       setLoading(false);
     };
     sendRequest();
-  }, [userId]);
+  }, [userId, props.loadTable]);
 
   return (
     <Container maxWidth="xl">
@@ -54,7 +56,7 @@ export default function UrlsTable() {
         variant="h3"
         sx={{
           fontWeight: 'bold',
-          marginY: '2rem',
+           marginTop: '5rem',
         }}
       >
         Hello {username} ! 👋
@@ -62,7 +64,9 @@ export default function UrlsTable() {
 
       <Typography variant="h4">Here Are your Links</Typography>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{
+        my: '5rem',
+      }} >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -75,7 +79,15 @@ export default function UrlsTable() {
           <TableBody>
             {urls.length === 0 && !loading && (
               <TableRow>
-                <TableCell colSpan={3}>No links</TableCell>
+                <TableCell
+                  colSpan={4}
+                  sx={{
+                    textAlign: 'center',
+                    fontSize: '1.5rem',
+                  }}
+                >
+                  Looks Like That You Don't Have any Links 😔
+                </TableCell>
               </TableRow>
             )}
             {urls?.map((row) => (
@@ -84,7 +96,7 @@ export default function UrlsTable() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.longUrl}
+                  {row.longUrl.slice(0, 30) }...
                 </TableCell>
                 <TableCell align="right">
                   <a
@@ -97,9 +109,9 @@ export default function UrlsTable() {
                   </a>
                 </TableCell>
                 <TableCell align="right">{row.clicks}</TableCell>
+                <TableCell align="right">{row.count}</TableCell>
               </TableRow>
             ))}
-            )}
           </TableBody>
         </Table>
       </TableContainer>

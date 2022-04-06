@@ -47,7 +47,9 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ isLoggedIn, userId, login, logout }}>
+      <AuthContext.Provider
+        value={{ isLoggedIn, userId, username, login, logout }}
+      >
         <Navbar />
         {routes}
       </AuthContext.Provider>

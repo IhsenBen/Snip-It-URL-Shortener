@@ -13,13 +13,13 @@ const initialValues = {
   url: '',
 };
 
-const URLShortnerForm = (props) => {
+const URLShortnerForm = ({route, setLoadTable}) => {
   const [url, setUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { route } = props;
+
 
   const handleSubmit = async (values) => {
     setUrl(values.url);
@@ -45,6 +45,7 @@ const URLShortnerForm = (props) => {
         throw new Error(responseData.message);
       }
       setShortUrl(responseData.link.shortUrl);
+     setLoadTable(prevloadTable => !prevloadTable);
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -55,7 +56,7 @@ const URLShortnerForm = (props) => {
   return (
     <div className="Form" style={{ marginTop: '100px' }}>
       <Errors error={error} loading={loading} />
-      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
+      <Typography variant="h4"  sx={{ textAlign: 'center' }}>
         Snip Your URL
       </Typography>
       <Grid container justifyContent="center" spacing={4}>
@@ -66,7 +67,10 @@ const URLShortnerForm = (props) => {
         >
           {(props) => {
             return (
-              <Box>
+              <Box sx={{
+                margin: '0 auto',
+                textAlign: 'center',
+              }}>
                 <Form>
                   <Grid
                     container
@@ -99,6 +103,15 @@ const URLShortnerForm = (props) => {
                     </Grid>
                   </Grid>
                 </Form>
+                <Box sx={{
+                  margin: '0 auto',
+                  textAlign: 'center',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  padding: '10px',
+                  width: '100%',
+
+                }}>
                 <Typography
                   variant="h8"
                   gutterBottom
@@ -106,6 +119,11 @@ const URLShortnerForm = (props) => {
                 >
                   Your Snipped URL:
                 </Typography>
+                <Typography
+                  variant="h8"
+                  gutterBottom
+                  sx={{ textAlign: 'center' }}
+                >
                 {shortUrl !== '' && (
                   <Link
                     href={`${process.env.REACT_APP_BACKEND_API}/link/${shortUrl}`}
@@ -114,6 +132,8 @@ const URLShortnerForm = (props) => {
                     {`${process.env.REACT_APP_BACKEND_API}/link/${shortUrl}`}
                   </Link>
                 )}
+                </Typography>
+                </Box>
               </Box>
             );
           }}
